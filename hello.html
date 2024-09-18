@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>MY TRAVEL BLOG</title>
+    <link rel="stylesheet" href="hii.css" />
+    <style>
+        /* Add your CSS styles for the slider here */
+        .slider {
+            width: 80%;
+            height: 60%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider img {
+            width: 60%;
+            display: none;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+        header {
+    background-color: #b1abe0;
+    color: #110e0e;
+    text-align: center;
+    padding: 20px;
+    font-size: 40px;
+    font-family: Bradley Hand ITC;
+}
+   .container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-color: #8178c5;
+    display: flex;
+  }
+  .tour {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .tour img {
+    width: 100%;
+    height: auto;
+  }
+  .tour-info {
+    padding: 10px;
+    font-family: Georgia;
+    color: black;
+  }
+  .tour-info h2 {
+    margin-top: 0;
+  }
+  .tour-info p {
+    margin: 5px 0;
+  }
+  .defaultButton {
+    background-color: rgb(236, 137, 153);
+    border: #c53e7d;
+}
+
+.activeButton {
+    background-color: rgb(150, 40, 60); /* Dark color */
+}
+
+  footer {
+    background-color: #c53e7d;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <section class="nav-bar">
+            <div class="logo">Go Trip</div>
+            <ul class="menu">
+                <li><a href="index.html">home</a></li>
+                <li><a href="hello.html">tours</a></li>
+                <li><a href="package.html">package</a></li>
+                <li><a href="gallery.html">gallery</a></li>
+                <li><a href="/about us/">about us</a></li>
+            </ul>
+        </section>
+    </nav>
+<center>
+    <div class="slider">
+    <center><img src="image1.jpeg" alt="Image 1"></center>
+    <center><img src="image2.jpg" alt="Image 2"></center>
+    <center><img src="image3.jpg" alt="Image 3"></center>
+    <center><img src="image4.jpg" alt="Image 3"></center>
+        <!-- Add more images as needed -->
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+</center>
+<center><header>
+    <p><b>Explore your toors</b></p>
+</header>
+</center>
+<div class="container">
+    <div class="tour">
+      <img src="image5.jpg" alt="Tour 1">
+      <div class="tour-info">
+        <center>
+        <h2>Tour 1: Shrinagar</h2>
+        <p>Location: Jammu&kashmir</p>
+        <p>Price: Rs12000</p>
+        <button onclick="bookTour('Tour 1')" id="bookButton" class="defaultButton">Book now</button>
+        </center>
+      </div>
+    </div>
+  
+    <div class="tour">
+      <img src="image6.jpg" alt="Tour 2">
+      <div class="tour-info">
+        <center>
+        <h2>Tour 2: Kedarnath</h2>
+        <p>Location: Himachal Pradesh</p>
+        <p>Price: Rs10000</p>
+        <button onclick="bookTour('Tour 2')" id="bookButton" class="defaultButton">Book Now</button>
+        </center>
+      </div>
+    </div>
+
+    <div class="tour">
+      <img src="image4.jpg" alt="Tour 1">
+      <div class="tour-info">
+        <center>
+        <h2>Tour 3: Kullu</h2>
+        <p>Location: </p>
+        <p>Price: Rs10000</p>
+        <button onclick="bookTour('Tour 3')" id="bookButton" class="defaultButton">Book now</button>
+        </center>
+      </div>
+    </div>
+
+    <div class="tour">
+      <img src="image7.jpg" alt="Tour 1">
+      <div class="tour-info">
+        <center>
+        <h2>Tour 1: Lonavala</h2>
+        <p>Location: Maharashtra</p>
+        <p>Price: Rs15000</p>
+        <button onclick="bookTour('Tour 4')" id="bookButton" class="defaultButton">Book now</button>
+        </center>
+      </div>
+    </div>
+  </div>
+    <script>
+        // JavaScript for image slider
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("slider")[0].getElementsByTagName("img");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex - 1].style.display = "block";
+        }
+        function bookTour(tourName) {
+    alert("You booked " + tourName + "!");
+    // You can add further actions here like redirecting to a booking page
+  }
+    </script>
+
+<footer>
+  <p>Privacy Policy | Terms Of Platform Use | Important Links | Emergency</p>
+  <p> © Ministry of Tourism, Government of India</p>
+</footer>
+</body>
+
+</html>
