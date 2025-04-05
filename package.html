@@ -4,288 +4,815 @@
 <head>
     <meta charset="UTF-8" />
     <title>MY TRAVEL BLOG</title>
-    <link rel="stylesheet" href="pac.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding-bottom: 100px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #c53e7d;
+            font-family: 'Bradley Hand ITC', cursive;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .menu li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .menu a:hover {
+            color: #c53e7d;
+        }
+        
+        .menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #c53e7d;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .menu a:hover::after {
+            width: 100%;
+        }
+        
+        /* Package Section */
+        .package {
+            padding: 60px 5%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-subtitle {
+            color: #c53e7d;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .section-text {
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .package-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .package-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transform: translateY(0);
+        }
+        
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .card-banner img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .package-card:hover .card-banner img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .card-text {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .card-meta-list {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .card-meta-item {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .meta-box {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .card-price {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .reviews {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        .card-rating {
+            color: #ffc107;
+            margin-top: 5px;
+        }
+        
+        .price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #c53e7d;
+        }
+        
+        .price span {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: normal;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary {
+            background-color: #c53e7d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #a03565;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: #333;
+            color: white;
+            display: block;
+            margin: 0 auto;
+            padding: 12px 30px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #111;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #c53e7d;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+        
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        /* Like Button */
+        .like-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        
+        .like-btn:hover {
+            color: #c53e7d;
+            transform: scale(1.1);
+        }
+        
+        .like-btn.liked {
+            color: #c53e7d;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-bar {
+                flex-direction: column;
+            }
+            
+            .menu {
+                margin-top: 15px;
+            }
+            
+            .menu li {
+                margin-left: 0;
+                margin: 0 10px;
+            }
+            
+            .package-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
-<style>
-    footer {
-background-color: #c53e7d;
-color: #fff;
-text-align: center;
-padding: 20px;
-position: fixed;
-bottom: 0;
-width: 100%;
-}
-</style>
+
 <body>
 
     <nav>
         <section class="nav-bar">
             <div class="logo">Go Trip</div>
             <ul class="menu">
-                <li><a href="design.html">home</a></li>
-                <li><a href="hello.html">tours</a></li>
-                <li><a href="package.html">package</a></li>
-                <li><a href="/blog/">blog</a></li>
-                <li><a href="/about us/">about us</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="hello.html">Tours</a></li>
+                <li><a href="package.html">Packages</a></li>
+                <li><a href="/blog/">Gallery</a></li>
+                <li><a href="/about us/">About Us</a></li>
             </ul>
         </section>
     </nav>
 
-<!-- 
-        - #PACKAGE
-      -->
-
-      <section class="package" id="package">
+    <section class="package" id="package">
         <div class="container">
 
-          <p class="section-subtitle">Popular Packeges</p>
+            <p class="section-subtitle">Popular Packages</p>
 
-          <h2 class="h2 section-title">Checkout Our Packeges</h2>
+            <h2 class="section-title">Checkout Our Packages</h2>
 
-          <p class="section-text">
-            Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque laudantium.
-            Sit ornare
-            mollitia tenetur, aptent.
-          </p>
+            <p class="section-text">
+                Discover amazing destinations with our carefully curated travel packages. Whether you're looking for adventure or relaxation, we have the perfect trip for you.
+            </p>
 
-          <ul class="package-list">
+            <ul class="package-list">
 
-            <li>
-              <div class="package-card">
+                <li>
+                    <div class="package-card">
+                        <button class="like-btn">♥</button>
+                        <figure class="card-banner">
+                            <img src="lak.jpg" alt="Experience The Great Holiday On Beach" loading="lazy">
+                        </figure>
 
-                <figure class="card-banner">
-                  <img src="lak.jpg" alt="Experience The Great Holiday On Beach" loading="lazy">
-                </figure>
+                        <div class="card-content">
 
-                <div class="card-content">
+                            <h3 class="card-title">Experience The Great Holiday On Beach</h3>
 
-                  <h3 class="h3 card-title">Experience The Great Holiday On Beach</h3>
+                            <p class="card-text">
+                                Enjoy 7 days of sun, sand, and sea at Malaysia's most beautiful beaches. Perfect for couples and families.
+                            </p>
 
-                  <p class="card-text">
-                    Laoreet, voluptatum nihil dolor esse quaerat mattis explicabo maiores, est aliquet porttitor! Eaque,
-                    cras, aspernatur.
-                  </p>
+                            <ul class="card-meta-list">
 
-                  <ul class="card-meta-list">
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="far fa-clock"></i>
+                                        <p class="text">7D/6N</p>
+                                    </div>
+                                </li>
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="time"></ion-icon>
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="fas fa-users"></i>
+                                        <p class="text">pax: 10</p>
+                                    </div>
+                                </li>
 
-                        <p class="text">7D/6N</p>
-                      </div>
-                    </li>
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <p class="text">Malaysia</p>
+                                    </div>
+                                </li>
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="people"></ion-icon>
+                            </ul>
 
-                        <p class="text">pax: 10</p>
-                      </div>
-                    </li>
+                        </div>
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="location"></ion-icon>
+                        <div class="card-price">
 
-                        <p class="text">Malaysia</p>
-                      </div>
-                    </li>
+                            <div class="wrapper">
 
-                  </ul>
+                                <p class="reviews">(25 reviews)</p>
 
-                </div>
+                                <div class="card-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
 
-                <div class="card-price">
+                            </div>
 
-                  <div class="wrapper">
+                            <p class="price">
+                                $750
+                                <span>/ per person</span>
+                            </p>
 
-                    <p class="reviews">(25 reviews)</p>
+                            <button class="btn btn-secondary book-btn" data-package="Experience The Great Holiday On Beach" data-price="$750">Book Now</button>
 
-                    <div class="card-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
+                        </div>
+
                     </div>
+                </li>
 
-                  </div>
+                <li>
+                    <div class="package-card">
+                        <button class="like-btn">♥</button>
+                        <figure class="card-banner">
+                            <img src="All.jpg" alt="Summer Holiday To The Oxolotan River" loading="lazy">
+                        </figure>
 
-                  <p class="price">
-                    $750
-                    <span>/ per person</span>
-                  </p>
+                        <div class="card-content">
 
-                  <button class="btn btn-secondary">Book Now</button>
+                            <h3 class="card-title">Summer Holiday To The Oxolotan River</h3>
 
-                </div>
+                            <p class="card-text">
+                                Adventure awaits with this exciting river holiday package. Perfect for nature lovers and thrill seekers.
+                            </p>
 
-              </div>
-            </li>
+                            <ul class="card-meta-list">
 
-            <li>
-              <div class="package-card">
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="far fa-clock"></i>
+                                        <p class="text">7D/6N</p>
+                                    </div>
+                                </li>
 
-                <figure class="card-banner">
-                  <img src="All.jpg" alt="Summer Holiday To The Oxolotan River" loading="lazy">
-                </figure>
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="fas fa-users"></i>
+                                        <p class="text">pax: 10</p>
+                                    </div>
+                                </li>
 
-                <div class="card-content">
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <p class="text">Malaysia</p>
+                                    </div>
+                                </li>
 
-                  <h3 class="h3 card-title">Summer Holiday To The Oxolotan River</h3>
+                            </ul>
 
-                  <p class="card-text">
-                    Laoreet, voluptatum nihil dolor esse quaerat mattis explicabo maiores, est aliquet porttitor! Eaque,
-                    cras, aspernatur.
-                  </p>
+                        </div>
 
-                  <ul class="card-meta-list">
+                        <div class="card-price">
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="time"></ion-icon>
+                            <div class="wrapper">
 
-                        <p class="text">7D/6N</p>
-                      </div>
-                    </li>
+                                <p class="reviews">(20 reviews)</p>
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="people"></ion-icon>
+                                <div class="card-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
 
-                        <p class="text">pax: 10</p>
-                      </div>
-                    </li>
+                            </div>
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="location"></ion-icon>
+                            <p class="price">
+                                $520
+                                <span>/ per person</span>
+                            </p>
 
-                        <p class="text">Malaysia</p>
-                      </div>
-                    </li>
+                            <button class="btn btn-secondary book-btn" data-package="Summer Holiday To The Oxolotan River" data-price="$520">Book Now</button>
 
-                  </ul>
+                        </div>
 
-                </div>
-
-                <div class="card-price">
-
-                  <div class="wrapper">
-
-                    <p class="reviews">(20 reviews)</p>
-
-                    <div class="card-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
                     </div>
+                </li>
 
-                  </div>
+                <li>
+                    <div class="package-card">
+                        <button class="like-btn">♥</button>
+                        <figure class="card-banner">
+                            <img src="him.png" alt="Santorini Island's Weekend Vacation" loading="lazy">
+                        </figure>
 
-                  <p class="price">
-                    $520
-                    <span>/ per person</span>
-                  </p>
+                        <div class="card-content">
 
-                  <button class="btn btn-secondary">Book Now</button>
+                            <h3 class="card-title">Santorini Island's Weekend Vacation</h3>
 
-                </div>
+                            <p class="card-text">
+                                Experience the magic of Santorini with this exclusive weekend getaway package.
+                            </p>
 
-              </div>
-            </li>
+                            <ul class="card-meta-list">
 
-            <li>
-              <div class="package-card">
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="far fa-clock"></i>
+                                        <p class="text">7D/6N</p>
+                                    </div>
+                                </li>
 
-                <figure class="card-banner">
-                  <img src="him.png" alt="Santorini Island's Weekend Vacation" loading="lazy">
-                </figure>
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="fas fa-users"></i>
+                                        <p class="text">pax: 10</p>
+                                    </div>
+                                </li>
 
-                <div class="card-content">
+                                <li class="card-meta-item">
+                                    <div class="meta-box">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <p class="text">Malaysia</p>
+                                    </div>
+                                </li>
 
-                  <h3 class="h3 card-title">Santorini Island's Weekend Vacation</h3>
+                            </ul>
 
-                  <p class="card-text">
-                    Laoreet, voluptatum nihil dolor esse quaerat mattis explicabo maiores, est aliquet porttitor! Eaque,
-                    cras, aspernatur.
-                  </p>
+                        </div>
 
-                  <ul class="card-meta-list">
+                        <div class="card-price">
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="time"></ion-icon>
+                            <div class="wrapper">
 
-                        <p class="text">7D/6N</p>
-                      </div>
-                    </li>
+                                <p class="reviews">(40 reviews)</p>
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="people"></ion-icon>
+                                <div class="card-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
 
-                        <p class="text">pax: 10</p>
-                      </div>
-                    </li>
+                            </div>
 
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="location"></ion-icon>
+                            <p class="price">
+                                $660
+                                <span>/ per person</span>
+                            </p>
 
-                        <p class="text">Malaysia</p>
-                      </div>
-                    </li>
+                            <button class="btn btn-secondary book-btn" data-package="Santorini Island's Weekend Vacation" data-price="$660">Book Now</button>
 
-                  </ul>
+                        </div>
 
-                </div>
-
-                <div class="card-price">
-
-                  <div class="wrapper">
-
-                    <p class="reviews">(40 reviews)</p>
-
-                    <div class="card-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
                     </div>
+                </li>
 
-                  </div>
+            </ul>
 
-                  <p class="price">
-                    $660
-                    <span>/ per person</span>
-                  </p>
-
-                  <button class="btn btn-secondary">Book Now</button>
-
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-          <button class="btn btn-primary">View All Packages</button>
+            <button class="btn btn-primary">View All Packages</button>
 
         </div>
-      </section>
+    </section>
 
-
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Book Your Dream Vacation</h2>
+            <div id="modalPackageInfo" style="margin-bottom: 20px; font-size: 1.1rem;">
+                <strong id="modalPackageName"></strong> - <span id="modalPackagePrice" style="color: #c53e7d;"></span>
+            </div>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Travel Date</label>
+                    <input type="date" id="date" required min="">
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="specialRequests">Special Requests</label>
+                    <textarea id="specialRequests" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary" style="width: 100%; margin-top: 20px; padding: 12px;">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
 
     <footer>
-        <p>Privacy Policy | Terms Of Platform Use | Important Links | Emergency</p>
-           <p> © Ministry of Tourism, Government of India</p>
+        <div>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms Of Platform Use</a> | 
+            <a href="#">Important Links</a> | 
+            <a href="#">Emergency</a>
+        </div>
+        <p>© Ministry of Tourism, Government of India</p>
+        <div class="social-icons" style="margin-top: 10px;">
+            <a href="#"><i class="fab fa-facebook-f" style="color: white; margin: 0 10px;"></i></a>
+            <a href="#"><i class="fab fa-twitter" style="color: white; margin: 0 10px;"></i></a>
+            <a href="#"><i class="fab fa-instagram" style="color: white; margin: 0 10px;"></i></a>
+            <a href="#"><i class="fab fa-youtube" style="color: white; margin: 0 10px;"></i></a>
+        </div>
     </footer>
-    </body>
-    
-    </html>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set minimum date for booking (today)
+            const dateInput = document.getElementById('date');
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            dateInput.min = `${yyyy}-${mm}-${dd}`;
+
+            // Like Button Functionality
+            document.querySelectorAll('.like-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('liked');
+                    if (this.classList.contains('liked')) {
+                        this.innerHTML = '<i class="fas fa-heart"></i>';
+                        // You could add code here to save the liked state
+                    } else {
+                        this.innerHTML = '<i class="far fa-heart"></i>';
+                    }
+                });
+            });
+
+            // Booking Modal Functionality
+            const modal = document.getElementById('bookingModal');
+            const closeModalBtn = document.querySelector('.close-modal');
+            const bookButtons = document.querySelectorAll('.book-btn');
+            const bookingForm = document.getElementById('bookingForm');
+            const modalPackageName = document.getElementById('modalPackageName');
+            const modalPackagePrice = document.getElementById('modalPackagePrice');
+
+            // Open modal when Book Now is clicked
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const packageName = this.getAttribute('data-package');
+                    const packagePrice = this.getAttribute('data-price');
+                    
+                    // Set package info in modal
+                    modalPackageName.textContent = packageName;
+                    modalPackagePrice.textContent = packagePrice;
+                    
+                    // Show modal
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                });
+            });
+
+            // Close modal when X is clicked
+            closeModalBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Form submission
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const package = modalPackageName.textContent;
+                const price = modalPackagePrice.textContent;
+                const date = document.getElementById('date').value;
+                const guests = document.getElementById('guests').value;
+                const requests = document.getElementById('specialRequests').value;
+                
+                // Here you would typically send this data to a server
+                console.log('Booking submitted:', {
+                    name,
+                    email,
+                    package,
+                    price,
+                    date,
+                    guests,
+                    requests
+                });
+                
+                // Show confirmation
+                alert(`Thank you for your booking, ${name}! We've received your request for ${package} and will contact you shortly to confirm.`);
+                
+                // Close modal and reset form
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                this.reset();
+            });
+
+            // Social media icons hover effect
+            const socialIcons = document.querySelectorAll('.social-icons i');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.2)';
+                });
+                icon.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
