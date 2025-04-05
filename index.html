@@ -3,63 +3,549 @@
 
 <head>
     <meta charset="UTF-8" />
-    
-    <link rel="stylesheet" href="sss.css" />
     <title>MY TRAVEL BLOG</title>
+    <link rel="stylesheet" href="sss.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-         footer {
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url(image.jpeg);
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #fff;
+        }
+
+        /* Navigation styles with enhanced interactivity */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #c53e7d;
+            font-family: 'Bradley Hand ITC', cursive;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: #c53e7d;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #c53e7d;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Banner styles with animation */
+        .banner {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(197, 62, 125, 0.2), rgba(177, 171, 224, 0.2));
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .banner-text-item {
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .banner-heading h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+        }
+
+        .banner-heading h1:hover {
+            transform: scale(1.02);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form input {
+            padding: 15px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            width: 250px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .form input:focus {
+            outline: none;
+            box-shadow: 0 2px 15px rgba(197, 62, 125, 0.7);
+            transform: scale(1.02);
+        }
+
+        .book {
+            background-color: #c53e7d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .book:hover {
+            background-color: #a03565;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(160, 53, 101, 0.4);
+        }
+
+        /* Floating action button */
+        .floating-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #c53e7d;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            background-color: #a03565;
+        }
+
+        /* Notification badge */
+        .notification {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff5722;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Footer styles */
+      footer { 
     background-color: #c53e7d;
     color: #fff;
     text-align: center;
-    padding: 20px;
+    padding: 8px 0;  /* Reduced from 10px */
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 1000;
+    font-size: 14px;  /* Added to shrink text */
+    line-height: 1.3; /* Tighter line spacing */
 }
+
+footer p {
+    margin: 5px 0;  /* Reduced from default */
+}
+
+.social-icons {
+    margin-top: 5px;  /* Reduced space above icons */
+}
+
+.social-icons i {
+    font-size: 16px;  /* Smaller icons */
+    margin: 0 8px;   /* Reduced spacing between icons */
+}
+
+        .social-icons i {
+            transition: all 0.3s;
+        }
+
+        .social-icons i:hover {
+            transform: translateY(-3px) scale(1.2);
+            color: #ffeb3b;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            color: #333;
+            position: relative;
+            animation: slideDown 0.4s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #c53e7d;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-bar {
+                flex-direction: column;
+            }
+
+            .menu {
+                margin-top: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu li {
+                margin: 10px 0;
+            }
+
+            .banner-heading h1 {
+                font-size: 2rem;
+            }
+
+            .form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .form input {
+                width: 80%;
+            }
+
+            .modal-content {
+                width: 90%;
+                margin: 20% auto;
+            }
+        }
     </style>
 </head>
 
-<body style="background-image: url(image.jpeg);">
-
-        <nav>
+<body>
+    <nav id="mainNav">
         <section class="nav-bar">
-            <div class="logo">Go Trip </div>
+            <div class="logo">Go Trip</div>
             <ul class="menu">
                 <li><a href="design.html">home</a></li>
-               <li><a href="hello.html">tours</a></li>
+                <li><a href="hello.html">tours</a></li>
                 <li><a href="package.html">package</a></li>
                 <li><a href="gallery.html">gallery</a></li>
                 <li><a href="/about us/">about us</a></li>
             </ul>
-            </div>
-      </nav>
         </section>
-        <!--===============Banner================-->
-        <section class="banner">
-            <div class="banner-text-item">
-                <div class="banner-heading">
-                    <h1>Find your Next tour!</h1>
-                </div>
-                <form class="form">
-                    <input type="text" list="mylist" placeholder="Where would you like to travel">
-                    <datalist id="mylist">
-                        <option>PANCHMARI</option>
-                        <option>SILIGURI</option>
-                        <option>SRINAGAR</option>
-                        <option>AMRITSAR</option>
-                        <option>RISHIKESH</option>
-                        <option>MANALI</option>
-                        <option>VRINDAVAN</option>
-                    </datalist>
-                    <input type="date" class="date">
-                    <a href="book" class="book">book</a>
-                </form>
+    </nav>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <div class="banner-text-item">
+            <div class="banner-heading">
+                <h1>Find your Next tour!</h1>
             </div>
-        </section>
-        <footer>
-            <p>Privacy Policy | Terms Of Platform Use | Important Links | Emergency</p>
-            <p> © Ministry of Tourism, Government of India</p>
-        </footer>
-        </body>
-        </html>
+            <form class="form" id="searchForm">
+                <input type="text" list="mylist" placeholder="Where would you like to travel" id="destinationInput">
+                <datalist id="mylist">
+                    <option>PANCHMARI</option>
+                    <option>SILIGURI</option>
+                    <option>SRINAGAR</option>
+                    <option>AMRITSAR</option>
+                    <option>RISHIKESH</option>
+                    <option>MANALI</option>
+                    <option>VRINDAVAN</option>
+                </datalist>
+                <input type="date" class="date" id="travelDate">
+                <a href="#" class="book" id="bookBtn">book</a>
+            </form>
+        </div>
+    </section>
+
+    <!-- Floating action button -->
+    <div class="floating-btn" id="floatingBtn">
+        <i class="fas fa-paper-plane"></i>
+        <span class="notification" id="notificationBadge">3</span>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Special Offers!</h2>
+            <p>Subscribe to our newsletter and get 10% off your first booking!</p>
+            <form id="newsletterForm">
+                <input type="email" placeholder="Your email address" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;">
+                <button type="submit" style="background-color: #c53e7d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%;">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>Privacy Policy | Terms Of Platform Use | Important Links | Emergency</p>
+        <p> © Ministry of Tourism, Government of India</p>
+        <div class="social-icons" style="margin-top: 10px;">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Booking form interaction
+        const bookBtn = document.getElementById('bookBtn');
+        const destinationInput = document.getElementById('destinationInput');
+        const travelDate = document.getElementById('travelDate');
         
+        bookBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (destinationInput.value && travelDate.value) {
+                // Show animated confirmation
+                bookBtn.innerHTML = '<i class="fas fa-check"></i> Booked!';
+                bookBtn.style.backgroundColor = '#4CAF50';
+                
+                setTimeout(() => {
+                    bookBtn.innerHTML = 'book';
+                    bookBtn.style.backgroundColor = '#c53e7d';
+                }, 2000);
+                
+                // Update notification badge
+                const badge = document.getElementById('notificationBadge');
+                badge.textContent = parseInt(badge.textContent) + 1;
+                badge.style.display = 'flex';
+                
+                // Show success message
+                alert(`Booking request for ${destinationInput.value} on ${travelDate.value} received! We'll contact you shortly.`);
+            } else {
+                // Shake animation for empty fields
+                if (!destinationInput.value) {
+                    destinationInput.style.border = '2px solid red';
+                    setTimeout(() => {
+                        destinationInput.style.border = 'none';
+                    }, 1000);
+                }
+                if (!travelDate.value) {
+                    travelDate.style.border = '2px solid red';
+                    setTimeout(() => {
+                        travelDate.style.border = 'none';
+                    }, 1000);
+                }
+                alert('Please select both destination and date');
+            }
+        });
+
+        // Set minimum date to today
+        travelDate.min = new Date().toISOString().split('T')[0];
+
+        // Floating button interaction
+        const floatingBtn = document.getElementById('floatingBtn');
+        floatingBtn.addEventListener('click', function() {
+            document.getElementById('bookingModal').style.display = 'block';
+        });
+
+        // Modal close button
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('bookingModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target == document.getElementById('bookingModal')) {
+                document.getElementById('bookingModal').style.display = 'none';
+            }
+        });
+
+        // Newsletter form submission
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing! Check your email for your discount code.');
+            document.getElementById('bookingModal').style.display = 'none';
+        });
+
+        // Typewriter effect for banner heading
+        const heading = document.querySelector('.banner-heading h1');
+        const originalText = heading.textContent;
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < originalText.length) {
+                heading.textContent = originalText.substring(0, i+1);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // Uncomment to enable typewriter effect
+        // heading.textContent = '';
+        // setTimeout(typeWriter, 1000);
+
+        // Destination input autocomplete enhancement
+        destinationInput.addEventListener('input', function() {
+            const options = document.getElementById('mylist').options;
+            for (let option of options) {
+                if (option.value.toLowerCase() === this.value.toLowerCase()) {
+                    this.style.backgroundColor = '#f0fff0';
+                    return;
+                }
+            }
+            this.style.backgroundColor = 'white';
+        });
+    </script>
+</body>
+</html>                  
